@@ -4,7 +4,8 @@
   <!--inherit recordId attribute-->
   <aura:attribute name="record" type="Object" />
   <aura:attribute name="accountRecord" type="Object" />
-  <aura:attribute name="recordError" type="String" />
+  <aura:attribute name="recordSaveError" type="String" default="" />
+
   <force:recordData
     aura:id="editRecord"
     recordId="{!v.recordId}"
@@ -12,7 +13,8 @@
     mode="EDIT"
     targetRecord="{!v.record}"
     targetFields="{!v.accountRecord}"
-    targetError="{!v.recordError}"
+    targetError="{!v.recordSaveError}"
+    recordUpdated="{!c.handleRecordUpdated}"
   />
   <br />
   <!-- Display an editing form -->
@@ -29,9 +31,9 @@
     </div>
   </lightning:card>
   <!-- Display Lightning Data Service errors, if any -->
-  <aura:if isTrue="{!not(empty(v.recordError))}">
+  <aura:if isTrue="{!not(empty(v.recordSaveError))}">
     <div class="recordError">
-      {!v.recordError}
+      {!v.recordSaveError}
     </div>
   </aura:if>
 </aura:component>
